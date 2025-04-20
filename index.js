@@ -41,6 +41,20 @@ function handleBookReadStatusTogglingClick(event) {
   updateAndDisplayLibrary(() => (book.read = !book.read));
 }
 
+function handleBookNoOpClick() {}
+
+const bookEntryActionHandlers = {
+  remove: handleBookRemovingClick,
+  toggleRead: handleBookReadStatusTogglingClick,
+  noop: handleBookNoOpClick,
+};
+
+function handleBookEntryClick(event) {
+  const actionName = event.target.dataset.action ?? "noop";
+  const handler = bookEntryActionHandlers[actionName];
+  handler(event);
+}
+
 function createBookEntry(book) {
   const $title = document.createElement("td");
   $title.textContent = book.title;
@@ -55,6 +69,7 @@ function createBookEntry(book) {
   $read.textContent = book.readInfoAsString();
 
   const $bookRemover = document.createElement("button");
+  $bookRemover.dataset.action = "remove";
   $bookRemover.textContent = "Remove Book";
   const $bookRemoveCell = document.createElement("td");
   $bookRemoveCell.append($bookRemover);
@@ -77,7 +92,7 @@ function createBookEntry(book) {
     $bookReadStatusToggleCell
   );
   $bookEntry.dataset.id = book.id;
-  $bookEntry.addEventListener("click", handleBookReadStatusTogglingClick);
+  $bookEntry.addEventListener("click", handleBookEntryClick);
 
   return $bookEntry;
 }
