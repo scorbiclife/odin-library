@@ -23,9 +23,6 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(book);
 }
 
-addBookToLibrary("Foo", "Foo Author", 1500, true);
-addBookToLibrary("Bar", "Bar Author", 1110, false);
-
 function createBookEntry(book) {
   const $bookRow = document.createElement("tr");
 
@@ -55,7 +52,17 @@ function displayLibrary() {
   $libraryEntries?.replaceChildren(...$libraryEntryElements);
 }
 
-displayLibrary();
+function updateAndDisplayLibrary(libraryUpdateFn) {
+  libraryUpdateFn();
+  displayLibrary();
+}
+
+/** Initialize and display library */
+
+updateAndDisplayLibrary(function initLibrary() {
+  addBookToLibrary("Foo", "Foo Author", 1500, true);
+  addBookToLibrary("Bar", "Bar Author", 1110, false);
+});
 
 const newBookDialog =
   /** @type {HTMLDialogElement} */
@@ -80,8 +87,7 @@ const newBookActionHandlers = {
       Number(newBookDialogData.pages),
       Boolean(newBookDialogData.read),
     ];
-    addBookToLibrary(title, author, pages, read);
-    displayLibrary();
+    updateAndDisplayLibrary(() => addBookToLibrary(title, author, pages, read));
   },
   cancel: function cancelNewBook() {
     return;
