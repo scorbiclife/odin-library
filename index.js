@@ -6,10 +6,14 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.readInfoAsString = function () {
+  return this.read ? "read" : "not read yet";
+};
+
 Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pageCount} pages, ${
-    this.read ? "read" : "not read yet"
-  }`;
+  return `${this.title} by ${this.author}, ${
+    this.pageCount
+  } pages, ${this.readInfoAsString()}`;
 };
 
 const myLibrary = [];
@@ -18,3 +22,39 @@ function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
+
+addBookToLibrary("Foo", "Foo Author", 1500, true);
+addBookToLibrary("Bar", "Bar Author", 1110, false);
+
+function createBookEntry(book) {
+  const $bookRow = document.createElement("tr");
+
+  const $id = document.createElement("td");
+  $id.textContent = book.id;
+
+  const $title = document.createElement("td");
+  $title.textContent = book.title;
+
+  const $author = document.createElement("td");
+  $author.textContent = book.author;
+
+  const $pages = document.createElement("td");
+  $pages.textContent = book.pageCount;
+
+  const $read = document.createElement("td");
+  $read.textContent = book.readInfoAsString();
+
+  $bookRow.append($id, $title, $author, $pages, $read);
+
+  return $bookRow;
+}
+
+function displayLibrary() {
+  const $library = document.getElementById("library");
+  for (const book of myLibrary) {
+    const $bookEntry = createBookEntry(book);
+    $library.append($bookEntry);
+  }
+}
+
+displayLibrary();
