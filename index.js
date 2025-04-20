@@ -32,10 +32,19 @@ function handleBookRemovingClick(event) {
   updateAndDisplayLibrary(() => removeBookEntry(bookIdToRemove));
 }
 
+function handleBookReadStatusToggleClick(event) {
+  const $bookEntry = event.currentTarget;
+  const book = myLibrary.find((book) => book.id === $bookEntry.dataset.id);
+  if ((book ?? null) === null) {
+    return;
+  }
+  updateAndDisplayLibrary(() => (book.read = !book.read));
+}
+
 function createBookEntry(book) {
   const $bookRow = document.createElement("tr");
   $bookRow.dataset.id = book.id;
-  $bookRow.addEventListener("click", handleBookRemovingClick);
+  $bookRow.addEventListener("click", handleBookReadStatusToggleClick);
 
   const $title = document.createElement("td");
   $title.textContent = book.title;
@@ -51,8 +60,25 @@ function createBookEntry(book) {
 
   const $bookRemover = document.createElement("button");
   $bookRemover.textContent = "Remove Book";
+  const $bookRemoveCell = document.createElement("td");
+  $bookRemoveCell.append($bookRemover);
 
-  $bookRow.append($title, $author, $pages, $read, $bookRemover);
+  const $bookReadStatusToggler = document.createElement("button");
+  $bookReadStatusToggler.dataset.action = "toggleRead";
+  $bookReadStatusToggler.textContent = book.read
+    ? "Mark as unread"
+    : "Mark as read";
+  const $bookReadStatusToggleCell = document.createElement("td");
+  $bookReadStatusToggleCell.append($bookReadStatusToggler);
+
+  $bookRow.append(
+    $title,
+    $author,
+    $pages,
+    $read,
+    $bookRemoveCell,
+    $bookReadStatusToggleCell
+  );
 
   return $bookRow;
 }
