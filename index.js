@@ -52,15 +52,18 @@ function createBookEntry(book) {
 function displayLibrary() {
   const $libraryEntries = document.getElementById("library-entries");
   const $libraryEntryElements = myLibrary.map(createBookEntry);
-  $libraryEntries.replaceChildren(...$libraryEntryElements);
+  $libraryEntries?.replaceChildren(...$libraryEntryElements);
 }
 
 displayLibrary();
 
-const newBookDialog = document.getElementById("new-book-dialog");
+const newBookDialog =
+  /** @type {HTMLDialogElement} */
+  (document.getElementById("new-book-dialog"));
+
 function showNewBookDialog() {
   newBookDialog.showModal();
 }
 
 const newBookDialogOpener = document.getElementById("new-book-dialog-open");
-newBookDialogOpener.addEventListener("click", showNewBookDialog);
+newBookDialogOpener?.addEventListener("click", showNewBookDialog);
