@@ -61,3 +61,6 @@ const newBookDialog = document.getElementById("new-book-dialog");
 function showNewBookDialog() {
   newBookDialog.showModal();
 }
+
+const newBookButton = document.getElementById("new-book-button");
+newBookButton.addEventListener("click", showNewBookDialog);
