@@ -42,10 +42,6 @@ function handleBookReadStatusToggleClick(event) {
 }
 
 function createBookEntry(book) {
-  const $bookRow = document.createElement("tr");
-  $bookRow.dataset.id = book.id;
-  $bookRow.addEventListener("click", handleBookReadStatusToggleClick);
-
   const $title = document.createElement("td");
   $title.textContent = book.title;
 
@@ -71,6 +67,7 @@ function createBookEntry(book) {
   const $bookReadStatusToggleCell = document.createElement("td");
   $bookReadStatusToggleCell.append($bookReadStatusToggler);
 
+  const $bookRow = document.createElement("tr");
   $bookRow.append(
     $title,
     $author,
@@ -79,6 +76,8 @@ function createBookEntry(book) {
     $bookRemoveCell,
     $bookReadStatusToggleCell
   );
+  $bookRow.dataset.id = book.id;
+  $bookRow.addEventListener("click", handleBookReadStatusToggleClick);
 
   return $bookRow;
 }
