@@ -65,5 +65,34 @@ function showNewBookDialog() {
   newBookDialog.showModal();
 }
 
+const newBookDialogForm =
+  /** @type {HTMLFormElement} */
+  (document.getElementById("new-book-dialog-form"));
+
+const newBookActionHandlers = {
+  create: function createNewBook() {
+    const newBookDialogData = Object.fromEntries(
+      new FormData(newBookDialogForm).entries()
+    );
+    const [title, author, pages, read] = [
+      String(newBookDialogData.title),
+      String(newBookDialogData.author),
+      Number(newBookDialogData.pages),
+      Boolean(newBookDialogData.read),
+    ];
+    addBookToLibrary(title, author, pages, read);
+    displayLibrary();
+  },
+  cancel: function cancelNewBook() {
+    return;
+  },
+};
+
+function handleNewBookDialogClose() {
+  newBookActionHandlers[newBookDialog.returnValue || "cancel"]();
+}
+
+newBookDialog.addEventListener("close", handleNewBookDialogClose);
+
 const newBookDialogOpener = document.getElementById("new-book-dialog-open");
 newBookDialogOpener?.addEventListener("click", showNewBookDialog);
