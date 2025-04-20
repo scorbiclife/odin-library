@@ -11,3 +11,10 @@ Book.prototype.info = function () {
     this.read ? "read" : "not read yet"
   }`;
 };
+
+const myLibrary = [];
+
+function addBookToLibrary(title, author, pages, read) {
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
+}
