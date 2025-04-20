@@ -32,7 +32,7 @@ function handleBookRemovingClick(event) {
   updateAndDisplayLibrary(() => removeBookEntry(bookIdToRemove));
 }
 
-function handleBookReadStatusToggleClick(event) {
+function handleBookReadStatusTogglingClick(event) {
   const $bookEntry = event.currentTarget;
   const book = myLibrary.find((book) => book.id === $bookEntry.dataset.id);
   if ((book ?? null) === null) {
@@ -77,7 +77,7 @@ function createBookEntry(book) {
     $bookReadStatusToggleCell
   );
   $bookEntry.dataset.id = book.id;
-  $bookEntry.addEventListener("click", handleBookReadStatusToggleClick);
+  $bookEntry.addEventListener("click", handleBookReadStatusTogglingClick);
 
   return $bookEntry;
 }
