@@ -16,15 +16,26 @@ Book.prototype.info = function () {
   } pages, ${this.readInfoAsString()}`;
 };
 
-const myLibrary = [];
+let myLibrary = [];
 
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
 
+function removeBookEntry(bookIdToRemove) {
+  myLibrary = myLibrary.filter((book) => book.id !== bookIdToRemove);
+}
+
+function handleBookRemovingClick(event) {
+  const bookIdToRemove = String(event.currentTarget.dataset.id);
+  updateAndDisplayLibrary(() => removeBookEntry(bookIdToRemove));
+}
+
 function createBookEntry(book) {
   const $bookRow = document.createElement("tr");
+  $bookRow.dataset.id = book.id;
+  $bookRow.addEventListener("click", handleBookRemovingClick);
 
   const $title = document.createElement("td");
   $title.textContent = book.title;
