@@ -56,3 +56,8 @@ function displayLibrary() {
 }
 
 displayLibrary();
+
+const newBookDialog = document.getElementById("new-book-dialog");
+function showNewBookDialog() {
+  newBookDialog.showModal();
+}
