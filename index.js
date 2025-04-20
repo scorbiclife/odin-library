@@ -16,6 +16,10 @@ Book.prototype.info = function () {
   } pages, ${this.readInfoAsString()}`;
 };
 
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+}
+
 let myLibrary = [];
 
 function addBookToLibrary(title, author, pages, read) {
@@ -38,7 +42,7 @@ function handleBookReadStatusTogglingClick(event) {
   if ((book ?? null) === null) {
     return;
   }
-  updateAndDisplayLibrary(() => (book.read = !book.read));
+  updateAndDisplayLibrary(() => book.toggleRead());
 }
 
 function handleBookNoOpClick() {}
