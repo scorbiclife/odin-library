@@ -50,11 +50,9 @@ function createBookEntry(book) {
 }
 
 function displayLibrary() {
-  const $library = document.getElementById("library");
-  for (const book of myLibrary) {
-    const $bookEntry = createBookEntry(book);
-    $library.append($bookEntry);
-  }
+  const $libraryEntries = document.getElementById("library-entries");
+  const $libraryEntryElements = myLibrary.map(createBookEntry);
+  $libraryEntries.replaceChildren(...$libraryEntryElements);
 }
 
 displayLibrary();
