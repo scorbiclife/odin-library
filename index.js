@@ -26,9 +26,6 @@ function addBookToLibrary(title, author, pages, read) {
 function createBookEntry(book) {
   const $bookRow = document.createElement("tr");
 
-  const $id = document.createElement("td");
-  $id.textContent = book.id;
-
   const $title = document.createElement("td");
   $title.textContent = book.title;
 
@@ -41,7 +38,10 @@ function createBookEntry(book) {
   const $read = document.createElement("td");
   $read.textContent = book.readInfoAsString();
 
-  $bookRow.append($id, $title, $author, $pages, $read);
+  const $bookRemover = document.createElement("button");
+  $bookRemover.textContent = "Remove Book";
+
+  $bookRow.append($title, $author, $pages, $read, $bookRemover);
 
   return $bookRow;
 }
