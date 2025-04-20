@@ -24,9 +24,28 @@
       <tbody id="library-entries"></tbody>
     </table>
     <dialog id="new-book-dialog">
-      <form action="#" method="dialog">
+      <form id="new-book-dialog-form" action="#" method="dialog">
         <legend>New Book</legend>
-        <button>Create</button>
+        <div>
+          <label for="new-book-title">Title:</label>
+          <input type="text" id="new-book-title" />
+        </div>
+        <div>
+          <label for="new-book-author">Author:</label>
+          <input type="text" id="new-book-author" />
+        </div>
+        <div>
+          <label for="new-book-pages">Number of Pages:</label>
+          <input type="number" id="new-book-pages" />
+        </div>
+        <div>
+          <label for="new-book-read">Read?</label>
+          <input type="checkbox" id="new-book-read" />
+        </div>
+        <div>
+          <button value="create" id="new-book-dialog-submit">Create</button>
+          <button value="cancel" id="new-book-dialog-close">Cancel</button>
+        </div>
       </form>
     </dialog>
     <button id="new-book-dialog-open">New Book</button>
