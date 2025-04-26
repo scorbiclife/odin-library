@@ -1,23 +1,25 @@
-function Book(title, author, pages, read) {
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pageCount = pages;
-  this.read = read;
-}
+class Book {
+  constructor(title, author, pages, read) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pageCount = pages;
+    this.read = read;
+  }
 
-Book.prototype.readInfoAsString = function () {
-  return this.read ? "read" : "not read yet";
-};
+  readInfoAsString() {
+    return this.read ? "read" : "not red yet";
+  }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${
-    this.pageCount
-  } pages, ${this.readInfoAsString()}`;
-};
+  info() {
+    return `${this.title} by ${this.author}, ${
+      this.pageCount
+    } pages, ${this.readInfoAsString()}`;
+  }
 
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
+  toggleRead() {
+    this.read = !this.read;
+  }
 }
 
 let myLibrary = [];
